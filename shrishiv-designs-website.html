@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shrishiv Designs — Interior Design Portfolio</title>
+<meta name="description" content="Shrishiv Designs — Interior Design Portfolio. Transforming spaces with bold, intentional design.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F7F3EC;
+    --card:#FFFDF9;
+    --taupe:#C9BBA8;
+    --taupe-soft:#E7DFD2;
+    --charcoal:#2A2621;
+    --charcoal-soft:#4A443C;
+    --brass:#A9895B;
+    --brass-deep:#8C6F45;
+    --ease-luxury: cubic-bezier(0.16,1,0.3,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ivory);
+    color:var(--charcoal);
+    font-family:'Inter',sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:400;
+    letter-spacing:0.01em;
+  }
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-size:0.72rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--brass-deep);
+    font-weight:500;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  section{padding:8rem 8vw;position:relative;}
+  @media(max-width:768px){ section{padding:5rem 6vw;} }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;width:100%;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:1.6rem 8vw;
+    z-index:100;
+    background:transparent;
+    transition:background .5s var(--ease-luxury), padding .5s var(--ease-luxury), box-shadow .5s var(--ease-luxury);
+  }
+  nav.scrolled{
+    background:rgba(247,243,236,0.92);
+    backdrop-filter:blur(10px);
+    padding:1.1rem 8vw;
+    box-shadow:0 1px 0 rgba(42,38,33,0.08);
+  }
+  .logo{font-family:'Cormorant Garamond',serif;font-size:1.35rem;letter-spacing:0.08em;}
+  .nav-links{display:flex;gap:2.4rem;font-size:0.85rem;letter-spacing:0.03em;}
+  .nav-links a{position:relative;padding-bottom:3px;}
+  .nav-links a::after{
+    content:"";position:absolute;bottom:0;left:0;width:0;height:1px;
+    background:var(--brass-deep);transition:width .4s var(--ease-luxury);
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-toggle{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--charcoal);}
+  @media(max-width:768px){
+    .nav-links{display:none;}
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    height:100svh;display:flex;align-items:flex-end;
+    padding:0 8vw 5rem;position:relative;
+    background:linear-gradient(180deg, rgba(42,38,33,0.15) 0%, rgba(42,38,33,0.55) 100%),
+      url('https://framerusercontent.com/images/SkMlmYf8W0KR4OZt4987WvsBubo.jpg?width=1600') center/cover no-repeat;
+  }
+  .hero-inner{color:#F7F3EC;max-width:760px;}
+  .hero .eyebrow{color:var(--taupe-soft);margin-bottom:1.2rem;}
+  .hero h1{font-size:clamp(2.8rem,7vw,5.4rem);line-height:1.05;font-weight:400;}
+  .hero p{font-size:1.05rem;color:#E9E3D8;max-width:480px;margin-top:1.4rem;font-weight:300;}
+  .hero-ctas{display:flex;gap:1rem;margin-top:2.4rem;flex-wrap:wrap;}
+
+  .btn{
+    display:inline-block;padding:0.95rem 2.1rem;font-size:0.85rem;
+    letter-spacing:0.04em;border-radius:2px;transition:all .4s var(--ease-luxury);
+    border:1px solid var(--brass);
+  }
+  .btn-solid{background:var(--brass);color:#fff;}
+  .btn-solid:hover{background:var(--brass-deep);border-color:var(--brass-deep);transform:translateY(-2px);}
+  .btn-ghost{color:#F7F3EC;border-color:rgba(247,243,236,0.55);}
+  .btn-ghost:hover{background:rgba(247,243,236,0.1);border-color:#F7F3EC;transform:translateY(-2px);}
+  .btn-dark{border-color:var(--charcoal);color:var(--charcoal);}
+  .btn-dark:hover{background:var(--charcoal);color:var(--ivory);transform:translateY(-2px);}
+
+  /* ---------- DRAWN LINE (signature element) ---------- */
+  .drawn-line{
+    width:100%;height:1px;background:var(--taupe);position:relative;overflow:hidden;margin:0 0 3.5rem;
+  }
+  .drawn-line::after{
+    content:"";position:absolute;top:0;left:0;height:100%;width:0%;
+    background:var(--brass);transition:width 1.4s var(--ease-luxury);
+  }
+  .drawn-line.in-view::after{width:100%;}
+
+  /* ---------- REVEAL ANIMATION ---------- */
+  .reveal{
+    opacity:0;transform:translateY(28px);
+    transition:opacity 1s var(--ease-luxury), transform 1s var(--ease-luxury);
+  }
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+  .stagger > * {opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease-luxury), transform .9s var(--ease-luxury);}
+  .stagger.in-view > *{opacity:1;transform:translateY(0);}
+  .stagger.in-view > *:nth-child(1){transition-delay:.05s;}
+  .stagger.in-view > *:nth-child(2){transition-delay:.18s;}
+  .stagger.in-view > *:nth-child(3){transition-delay:.31s;}
+  .stagger.in-view > *:nth-child(4){transition-delay:.44s;}
+  .stagger.in-view > *:nth-child(5){transition-delay:.57s;}
+  .stagger.in-view > *:nth-child(6){transition-delay:.70s;}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{max-width:640px;margin-bottom:4rem;}
+  .section-head h2{font-size:clamp(2rem,4vw,3rem);margin-top:0.6rem;font-weight:400;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:5vw;align-items:center;}
+  @media(max-width:900px){.about-grid{grid-template-columns:1fr;}}
+  .about-photo{position:relative;}
+  .about-photo img{width:100%;border-radius:2px;filter:grayscale(8%);}
+  .about-copy p{font-size:1.05rem;line-height:1.75;color:var(--charcoal-soft);font-weight:300;margin-bottom:1.4rem;}
+  .stats{display:flex;gap:3rem;margin-top:2.5rem;flex-wrap:wrap;}
+  .stat h3{font-size:2.6rem;color:var(--brass-deep);}
+  .stat span{display:block;font-size:0.78rem;letter-spacing:0.05em;color:var(--charcoal-soft);margin-top:0.2rem;}
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--taupe);}
+  @media(max-width:900px){.services-grid{grid-template-columns:1fr;}}
+  .service-card{background:var(--ivory);padding:3rem 2.2rem;transition:background .5s var(--ease-luxury);}
+  .service-card:hover{background:var(--card);}
+  .service-num{font-size:0.8rem;color:var(--brass);letter-spacing:0.1em;margin-bottom:1.6rem;display:block;}
+  .service-card h3{font-size:1.55rem;margin-bottom:0.9rem;}
+  .service-card p{font-size:0.95rem;color:var(--charcoal-soft);line-height:1.65;font-weight:300;}
+
+  /* ---------- PROCESS ---------- */
+  .process-note{
+    border-left:2px solid var(--brass);padding:1rem 1.6rem;margin-bottom:3.5rem;
+    background:rgba(169,137,91,0.06);max-width:640px;font-size:0.95rem;color:var(--charcoal-soft);
+  }
+  .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2.2rem;position:relative;}
+  @media(max-width:900px){.process-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:520px){.process-grid{grid-template-columns:1fr;}}
+  .process-step{padding-top:1.6rem;border-top:1px solid var(--taupe);}
+  .process-step .step-num{font-size:0.78rem;color:var(--brass-deep);letter-spacing:0.1em;}
+  .process-step h3{font-size:1.35rem;margin:0.7rem 0 0.6rem;}
+  .process-step p{font-size:0.9rem;color:var(--charcoal-soft);line-height:1.6;font-weight:300;}
+  .tag-free{display:inline-block;margin-top:0.8rem;font-size:0.72rem;letter-spacing:0.05em;color:var(--brass-deep);border:1px solid var(--brass);padding:0.25rem 0.6rem;border-radius:20px;}
+
+  /* ---------- WORK ---------- */
+  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;}
+  @media(max-width:900px){.work-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:600px){.work-grid{grid-template-columns:1fr;}}
+  .work-item{position:relative;overflow:hidden;border-radius:2px;cursor:pointer;}
+  .work-item img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-luxury);}
+  .work-item:hover img{transform:scale(1.06);}
+  .work-overlay{
+    position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,17,14,0.75) 0%, rgba(20,17,14,0) 45%);
+    display:flex;flex-direction:column;justify-content:flex-end;padding:1.4rem;color:#fff;
+    opacity:0;transition:opacity .5s var(--ease-luxury);
+  }
+  .work-item:hover .work-overlay{opacity:1;}
+  .work-overlay .cat{font-size:0.72rem;letter-spacing:0.1em;color:var(--taupe-soft);text-transform:uppercase;}
+  .work-overlay h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-top:0.3rem;}
+  .work-overlay .yr{font-size:0.78rem;color:#cfc6b8;margin-top:0.2rem;}
+
+  /* ---------- PRICING ---------- */
+  .price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;}
+  @media(max-width:900px){.price-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:560px){.price-grid{grid-template-columns:1fr;}}
+  .price-card{
+    background:var(--card);border:1px solid var(--taupe-soft);border-radius:3px;
+    padding:2.4rem 1.8rem;display:flex;flex-direction:column;position:relative;
+    transition:transform .5s var(--ease-luxury), box-shadow .5s var(--ease-luxury);
+  }
+  .price-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px -20px rgba(42,38,33,0.25);}
+  .price-card.popular{border-color:var(--brass);}
+  .badge{position:absolute;top:-12px;right:1.6rem;background:var(--brass);color:#fff;font-size:0.68rem;letter-spacing:0.05em;padding:0.35rem 0.8rem;border-radius:20px;}
+  .price-card h3{font-size:1.4rem;margin-bottom:0.7rem;}
+  .price-card p.desc{font-size:0.88rem;color:var(--charcoal-soft);line-height:1.55;font-weight:300;margin-bottom:1.4rem;flex-grow:0;}
+  .price-list{list-style:none;font-size:0.85rem;color:var(--charcoal-soft);margin-bottom:1.6rem;}
+  .price-list li{padding:0.35rem 0;position:relative;padding-left:1.2rem;}
+  .price-list li::before{content:"✦";position:absolute;left:0;color:var(--brass);font-size:0.7rem;top:0.5rem;}
+  .price-amount{margin-top:auto;font-size:1.8rem;font-family:'Cormorant Garamond',serif;color:var(--charcoal);}
+  .price-amount span{font-size:0.85rem;font-family:'Inter',sans-serif;color:var(--charcoal-soft);}
+
+  /* ---------- INSTAGRAM ---------- */
+  .insta-section{background:var(--charcoal);color:var(--ivory);text-align:center;}
+  .insta-section .eyebrow{color:var(--taupe-soft);}
+  .insta-section h2{font-size:clamp(1.9rem,4vw,2.8rem);margin:0.6rem 0 1rem;}
+  .insta-section p{color:#C9C1B4;font-weight:300;max-width:520px;margin:0 auto 2.4rem;}
+  .insta-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:0.6rem;margin-bottom:2.6rem;}
+  @media(max-width:900px){.insta-grid{grid-template-columns:repeat(3,1fr);}}
+  .insta-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:2px;filter:grayscale(15%);transition:filter .5s, transform .5s var(--ease-luxury);}
+  .insta-grid img:hover{filter:grayscale(0%);transform:scale(1.04);}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5vw;}
+  @media(max-width:900px){.contact-grid{grid-template-columns:1fr;}}
+  .contact-info p{font-size:1.05rem;color:var(--charcoal-soft);line-height:1.75;font-weight:300;margin-bottom:2.2rem;max-width:440px;}
+  .contact-links{display:flex;flex-direction:column;gap:1rem;font-size:1rem;}
+  .contact-links a{display:flex;align-items:center;gap:0.8rem;width:fit-content;border-bottom:1px solid transparent;transition:border-color .3s;padding-bottom:2px;}
+  .contact-links a:hover{border-color:var(--brass);}
+  form{display:flex;flex-direction:column;gap:1.2rem;}
+  .field{display:flex;flex-direction:column;gap:0.5rem;}
+  label{font-size:0.78rem;letter-spacing:0.04em;color:var(--charcoal-soft);}
+  input,select,textarea{
+    background:transparent;border:none;border-bottom:1px solid var(--taupe);
+    padding:0.6rem 0.1rem;font-family:'Inter',sans-serif;font-size:0.95rem;color:var(--charcoal);
+    transition:border-color .3s;
+  }
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--brass);}
+  textarea{resize:vertical;min-height:90px;}
+  form .btn-solid{margin-top:0.6rem;align-self:flex-start;border:none;cursor:pointer;font-family:'Inter',sans-serif;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:3rem 8vw;display:flex;justify-content:space-between;align-items:center;
+    border-top:1px solid var(--taupe-soft);font-size:0.85rem;color:var(--charcoal-soft);flex-wrap:wrap;gap:1rem;
+  }
+  .footer-social{display:flex;gap:1.4rem;}
+
+  /* ---------- WHATSAPP FLOAT ---------- */
+  .wa-float{
+    position:fixed;bottom:1.8rem;right:1.8rem;background:#25D366;color:#fff;
+    width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 24px rgba(0,0,0,0.25);z-index:90;transition:transform .3s var(--ease-luxury);
+  }
+  .wa-float:hover{transform:scale(1.08);}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="logo">SHRISHIV DESIGNS</div>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <button class="nav-toggle">☰</button>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+  <div class="hero-inner reveal">
+    <div class="eyebrow">Interior Design</div>
+    <h1>Spaces that<br>move you.</h1>
+    <p>Crafting interiors with intention — where bold design meets lived experience.</p>
+    <div class="hero-ctas">
+      <a href="#work" class="btn btn-solid">View Work</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="drawn-line reveal"></div>
+  <div class="about-grid">
+    <div class="about-photo reveal">
+      <img src="https://framerusercontent.com/images/SkMlmYf8W0KR4OZt4987WvsBubo.jpg?width=840&height=1260" alt="Umang Vani, Interior Designer">
+    </div>
+    <div class="about-copy reveal">
+      <div class="eyebrow">About Me</div>
+      <h2 style="font-size:clamp(1.9rem,4vw,2.8rem);margin:0.6rem 0 1.4rem;">Design is how a space speaks.</h2>
+      <p>I'm Umang Vani — an interior designer with a passion for transforming spaces into experiences. With over <strong>4 years</strong> of practice, I bring a distinctive approach that balances architectural discipline with an artist's sensitivity to material, light, and atmosphere.</p>
+      <p>From intimate residences to boutique commercial spaces, every project begins with a single question: how should this place make you feel?</p>
+      <div class="stats">
+        <div class="stat"><h3>4+</h3><span>Years of Practice</span></div>
+        <div class="stat"><h3>25+</h3><span>Projects Completed</span></div>
+        <div class="stat"><h3>2</h3><span>Free Site Visits</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-head reveal">
+    <div class="eyebrow">Services</div>
+    <h2>What I offer</h2>
+  </div>
+  <div class="services-grid stagger">
+    <div class="service-card">
+      <span class="service-num">01</span>
+      <h3>Interior Design</h3>
+      <p>Full-scope residential and commercial interior design — from spatial planning and material selection to furnishing and final styling.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-num">02</span>
+      <h3>Space Planning</h3>
+      <p>Precise spatial analysis and layout optimization — creating flow, function, and feeling in every square metre of the space.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-num">03</span>
+      <h3>Design Consultation</h3>
+      <p>Standalone consultations for individuals who need expert guidance on direction, materials, palette, or layout without a full-service brief.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-head reveal">
+    <div class="eyebrow">Process</div>
+    <h2>How I work</h2>
+    <p style="margin-top:0.8rem;color:var(--charcoal-soft);font-weight:300;">A clear, collaborative journey from first conversation to final reveal.</p>
+  </div>
+  <div class="process-note reveal">✦ <strong>2 site visits are completely free</strong> — no obligation, no hidden charges. Just a genuine conversation about your space.</div>
+  <div class="process-grid stagger">
+    <div class="process-step">
+      <span class="step-num">01</span>
+      <h3>Site Visit</h3>
+      <p>We visit your space for free — twice. We listen, measure, and understand your lifestyle, requirements, and aspirations.</p>
+      <span class="tag-free">Free · No Commitment</span>
+    </div>
+    <div class="process-step">
+      <span class="step-num">02</span>
+      <h3>Concept &amp; 2D Plans</h3>
+      <p>We translate your vision into precise 2D floor plans — layouts, furniture placement, and spatial flow — reviewed and refined with you.</p>
+    </div>
+    <div class="process-step">
+      <span class="step-num">03</span>
+      <h3>3D Visualisation</h3>
+      <p>Photorealistic 3D renders bring your space to life before a single wall is touched — so you can see, feel, and approve every decision.</p>
+    </div>
+    <div class="process-step">
+      <span class="step-num">04</span>
+      <h3>Execution &amp; Handover</h3>
+      <p>From sourcing materials to supervising contractors, we manage every detail end-to-end — handing over a space that is exactly as envisioned.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-head reveal">
+    <div class="eyebrow">Selected Work</div>
+    <h2>Projects</h2>
+  </div>
+  <div class="work-grid stagger">
+    <div class="work-item" style="aspect-ratio:800/613;">
+      <img src="https://framerusercontent.com/images/ZvNvEjVxl905PdDpoNE8gu4CIs.jpg?width=800&height=613" alt="The Silva Residence">
+      <div class="work-overlay"><span class="cat">Residential · 2024</span><h3>The Silva Residence</h3></div>
+    </div>
+    <div class="work-item" style="aspect-ratio:800/533;">
+      <img src="https://framerusercontent.com/images/1WY2SC4a6Ym584bdnXOLI5rzFM.jpg?width=800&height=533" alt="Maison Éclat">
+      <div class="work-overlay"><span class="cat">Commercial · 2024</span><h3>Maison Éclat</h3></div>
+    </div>
+    <div class="work-item" style="aspect-ratio:800/533;">
+      <img src="https://framerusercontent.com/images/IkBFeCS93pBDRCqd132OjfuO9M.jpg?width=800&height=533" alt="Studio Noir">
+      <div class="work-overlay"><span class="cat">Office · 2023</span><h3>Studio Noir</h3></div>
+    </div>
+    <div class="work-item" style="aspect-ratio:800/500;">
+      <img src="https://framerusercontent.com/images/T3GbM0F1vrViqzPDqDXWpZ53v78.jpg?width=800&height=500" alt="The Asha Penthouse">
+      <div class="work-overlay"><span class="cat">Residential · 2023</span><h3>The Asha Penthouse</h3></div>
+    </div>
+    <div class="work-item" style="aspect-ratio:800/414;">
+      <img src="https://framerusercontent.com/images/gtwtX4ZDimC6Tx0BodmrjFCOg.jpg?width=800&height=414" alt="Verdant Spa">
+      <div class="work-overlay"><span class="cat">Hospitality · 2022</span><h3>Verdant Spa</h3></div>
+    </div>
+    <div class="work-item" style="aspect-ratio:800/622;">
+      <img src="https://framerusercontent.com/images/jm2dWFGgUxRBZUemPgA64V2Z0.jpg?width=800&height=622" alt="Loft on Fifth">
+      <div class="work-overlay"><span class="cat">Residential · 2022</span><h3>Loft on Fifth</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-head reveal">
+    <div class="eyebrow">Pricing</div>
+    <h2>Transparent pricing</h2>
+    <p style="margin-top:0.8rem;color:var(--charcoal-soft);font-weight:300;">All packages include a detailed brief, revisions, and personal guidance. 2 site visits always free.</p>
+  </div>
+  <div class="price-grid stagger">
+    <div class="price-card">
+      <h3>2D Floor Plan</h3>
+      <p class="desc">Detailed scaled floor plan with furniture layout, dimensions, and circulation flow.</p>
+      <ul class="price-list">
+        <li>Scaled layout drawing</li>
+        <li>Furniture placement plan</li>
+        <li>Up to 2 revisions</li>
+      </ul>
+      <div class="price-amount">₹3,000 <span>/ room</span></div>
+    </div>
+    <div class="price-card popular">
+      <span class="badge">Most Popular</span>
+      <h3>3D Visualisation</h3>
+      <p class="desc">Photorealistic 3D renders of your space — see every material, finish, and lighting before it's built.</p>
+      <ul class="price-list">
+        <li>High-res 3D render per view</li>
+        <li>Material &amp; finish preview</li>
+        <li>Multiple angles included</li>
+      </ul>
+      <div class="price-amount">₹4,000 <span>/ view</span></div>
+    </div>
+    <div class="price-card">
+      <h3>Full Interior Design</h3>
+      <p class="desc">End-to-end interior design — from concept and planning to material sourcing and final styling.</p>
+      <ul class="price-list">
+        <li>2D plans + 3D renders</li>
+        <li>Material &amp; vendor sourcing</li>
+        <li>Site supervision</li>
+      </ul>
+      <div class="price-amount" style="font-size:1.4rem;">Custom Quote</div>
+    </div>
+    <div class="price-card">
+      <h3>Site Supervision</h3>
+      <p class="desc">Dedicated on-site supervision throughout execution — ensuring quality, timelines, and the design vision are all upheld.</p>
+      <ul class="price-list">
+        <li>Regular site visits</li>
+        <li>Contractor coordination</li>
+        <li>Progress reporting</li>
+      </ul>
+      <div class="price-amount" style="font-size:1.4rem;">Custom Quote</div>
+    </div>
+  </div>
+  <p class="reveal" style="margin-top:2.2rem;font-size:0.9rem;color:var(--charcoal-soft);">✦ First <strong>2 site visits are always free</strong> — book a consultation to discuss your project. All pricing is per room unless stated otherwise.</p>
+  <div class="reveal" style="margin-top:1.8rem;">
+    <a href="https://wa.me/917415914573?text=Hi%20Umang!%20I%20visited%20your%20portfolio%20at%20Shrishiv%20Design%20and%20I%E2%80%99m%20interested%20in%20an%20interior%20design%20project.%20Can%20we%20connect%3F" class="btn btn-dark" target="_blank">Have questions? Message on WhatsApp →</a>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="insta-section">
+  <div class="eyebrow reveal">Instagram</div>
+  <h2 class="reveal">@shrishivdesign</h2>
+  <p class="reveal">Follow along for daily design inspiration and behind-the-scenes glimpses from Shrishiv Design.</p>
+  <div class="insta-grid stagger">
+    <img src="https://framerusercontent.com/images/ZvNvEjVxl905PdDpoNE8gu4CIs.jpg?width=400&height=400" alt="Instagram post">
+    <img src="https://framerusercontent.com/images/1WY2SC4a6Ym584bdnXOLI5rzFM.jpg?width=400&height=400" alt="Instagram post">
+    <img src="https://framerusercontent.com/images/IkBFeCS93pBDRCqd132OjfuO9M.jpg?width=400&height=400" alt="Instagram post">
+    <img src="https://framerusercontent.com/images/T3GbM0F1vrViqzPDqDXWpZ53v78.jpg?width=400&height=400" alt="Instagram post">
+    <img src="https://framerusercontent.com/images/gtwtX4ZDimC6Tx0BodmrjFCOg.jpg?width=400&height=400" alt="Instagram post">
+    <img src="https://framerusercontent.com/images/jm2dWFGgUxRBZUemPgA64V2Z0.jpg?width=400&height=400" alt="Instagram post">
+  </div>
+  <a href="https://www.instagram.com/shrishivdesign" target="_blank" class="btn btn-ghost reveal">Follow on Instagram</a>
+  <!-- For a live auto-updating grid instead of static images, embed a widget like
+       Elfsight, SnapWidget, or Behold.so here — they require no Facebook Developer approval. -->
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="drawn-line reveal"></div>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <div class="eyebrow">Contact</div>
+      <h2 style="font-size:clamp(1.9rem,4vw,2.8rem);margin:0.6rem 0 1.2rem;">Let's create something beautiful.</h2>
+      <p>Have a project in mind? I'd love to hear about your space and vision. Let's start a conversation.</p>
+      <div class="contact-links">
+        <a href="mailto:imagine.walls29@gmail.com">imagine.walls29@gmail.com</a>
+        <a href="https://wa.me/917415914573" target="_blank">WhatsApp — +91 74159 14573</a>
+        <a href="tel:+917415914573">+91 74159 14573</a>
+        <a href="https://www.instagram.com/shrishivdesign" target="_blank">Instagram — @shrishivdesign</a>
+      </div>
+    </div>
+    <form class="reveal" onsubmit="return handleSubmit(event)">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+      </div>
+      <div class="field">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone">
+      </div>
+      <div class="field">
+        <label for="project">Type of Project</label>
+        <select id="project">
+          <option>Residential</option>
+          <option>Commercial</option>
+          <option>Consultation Only</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-solid">Send Message</button>
+      <!-- Replace this handler with Formspree or EmailJS to send real emails from a static site -->
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="logo" style="font-size:1.1rem;">SHRISHIV DESIGNS</div>
+  <div>© 2026 Shrishiv Design — All rights reserved.</div>
+  <div class="footer-social">
+    <a href="https://www.instagram.com/shrishivdesign" target="_blank">Instagram</a>
+    <a href="mailto:imagine.walls29@gmail.com">Email</a>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/917415914573" target="_blank" aria-label="Chat on WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39c1.44.79 3.06 1.2 4.71 1.2h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.05 2h-.01zm5.78 14.13c-.24.68-1.4 1.31-1.93 1.35-.5.05-1.02.07-1.65-.1-.38-.11-.87-.27-1.5-.53-2.64-1.14-4.36-3.8-4.5-3.97-.13-.17-1.08-1.43-1.08-2.73 0-1.3.68-1.94.92-2.2.24-.27.53-.34.7-.34.18 0 .35 0 .5.01.16.01.38-.06.6.46.24.57.8 1.98.87 2.12.07.15.11.32.02.51-.09.19-.14.31-.27.47-.13.16-.28.35-.4.47-.13.13-.27.28-.12.54.16.27.7 1.15 1.5 1.86 1.03.92 1.9 1.2 2.17 1.34.27.13.42.11.58-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.27.13.44.2.51.31.06.11.06.63-.18 1.32z"/></svg>
+</a>
+
+<script>
+  // Navbar scroll state
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Scroll reveal (fade + move, staggered children — Studio McGee style)
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal, .stagger, .drawn-line').forEach(el => {
+    if (reduceMotion) { el.classList.add('in-view'); }
+    else { observer.observe(el); }
+  });
+
+  function handleSubmit(e){
+    e.preventDefault();
+    alert("Thanks! This form needs to be connected to Formspree or EmailJS to actually send messages — see the comment in the code.");
+    return false;
+  }
+</script>
+
+</body>
+</html>
